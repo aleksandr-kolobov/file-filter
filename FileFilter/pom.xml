@@ -24,6 +24,7 @@
     </dependencies>
 
     <build>
+        <finalName>file-filter</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -36,7 +37,6 @@
                             <mainClass>org.alexkolo.filefilter.FileFilterApp</mainClass>
                         </manifest>
                     </archive>
-                    <finalName>file-filter</finalName>
                 </configuration>
             </plugin>
         </plugins>
