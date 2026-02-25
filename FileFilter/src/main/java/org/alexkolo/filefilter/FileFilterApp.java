@@ -15,19 +15,12 @@ public class FileFilterApp {
         }
 
         Params params = new Params(args);
-        System.out.println("File Filter utility starts with params:");
-        System.out.println("Output path: " + params.getOutputPath());
-        System.out.println("Output file prefix: " + params.getFilePrefix());
-        System.out.println("File write mode: " + (params.isAppendMode() ? "Append" : "Rewrite"));
-        System.out.println("Statistics mode: " + (params.isFullStatistics() ? "Full" : "Short"));
-        System.out.println("Input files: " + params.getInputFiles());
-
-        FilterService service = new FilterService();
         Statistics statistics = new Statistics(params.isFullStatistics());
+        FilterService service = new FilterService(statistics);
         try (FilterWriter writer = new FilterWriter(params.getOutputPath(), params.getFilePrefix(), params.isAppendMode())) {
             for (String inputFile : params.getInputFiles()) {
                 try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
-                    service.processFile(reader, writer, statistics);
+                    service.processFile(reader, writer);
                 } catch (Exception e) {
                     System.err.println("Error process file: " + inputFile + " - " + e.getMessage());
                 }
@@ -39,12 +32,16 @@ public class FileFilterApp {
     }
 
     private static void printUsage() {
-        System.out.println("Utility usage: java -jar file-filter.jar [options] <input files>");
-        System.out.println("Options:");
-        System.out.println("  -o <path>    Output directory path (default: current directory)");
-        System.out.println("  -p <prefix>  Prefix for output files (default: empty)");
-        System.out.println("  -a           Append write mode (default: overwrite)");
-        System.out.println("  -s           Short statistics (default)");
-        System.out.println("  -f           Full statistics");
+        String usage = """
+        Utility usage: java -jar target/file-filter.jar [options] <input files>
+        Options:
+          -o <path>    Output directory path (default: current directory)
+          -p <prefix>  Prefix for output files (default: empty)
+          -a           Append write mode (default: overwrite)
+          -s           Short statistics (default)
+          -f           Full statistics
+        Example: java -jar target/file-filter.jar -o data/result -p res_ data/in1.txt data/in2.txt -f
+        """;
+        System.out.println(usage);
     }
 }

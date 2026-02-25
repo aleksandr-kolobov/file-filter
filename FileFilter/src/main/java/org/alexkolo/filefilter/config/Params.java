@@ -20,6 +20,12 @@ public class Params {
     private final List<String> inputFiles = new ArrayList<>();
 
     public Params(String[] args) {
+        initParams(args);
+        validateParams();
+        printParams();
+    }
+
+    private void initParams(String[] args) {
         for (int i = 0; i < args.length; i++) {
             switch (args[i]) {
                 case "-o" -> {
@@ -37,11 +43,8 @@ public class Params {
                     }
                 }
                 case "-a" -> appendMode = true;
-
                 case "-f" -> fullStatistics = true;
-
                 case "-s" -> shortStatistics = true;
-
                 default -> {
                     if (args[i].charAt(0) != '-') {
                         inputFiles.add(args[i]);
@@ -51,7 +54,9 @@ public class Params {
                 }
             }
         }
+    }
 
+    private void validateParams() {
         try {
             Path dir = Paths.get(outputPath);
             if (!Files.exists(dir)) {
@@ -77,5 +82,14 @@ public class Params {
         if (inputFiles.isEmpty()) {
             System.err.println("No input files specified!");
         }
+    }
+
+    private void printParams() {
+        System.out.println("File Filter utility starts with params:");
+        System.out.println("Output path: " + outputPath);
+        System.out.println("Output file prefix: " + filePrefix);
+        System.out.println("File write mode: " + (appendMode ? "Append" : "Rewrite"));
+        System.out.println("Statistics mode: " + (fullStatistics ? "Full" : "Short"));
+        System.out.println("Input files: " + inputFiles);
     }
 }

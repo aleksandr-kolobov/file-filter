@@ -1,15 +1,19 @@
 package org.alexkolo.filefilter.service;
 
+import lombok.RequiredArgsConstructor;
 import org.alexkolo.filefilter.model.DataType;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+@RequiredArgsConstructor
 public class FilterService {
-    public void processFile(BufferedReader reader, FilterWriter writer, Statistics statistics) throws IOException {
+
+    private final Statistics statistics;
+
+    public void processFile(BufferedReader reader, FilterWriter writer) throws IOException {
         String line;
         while ((line = reader.readLine()) != null) {
-            line = line.trim();
-            if (line.isEmpty()) {
+            if (line.isBlank()) {
                 continue;
             }
             DataType dataType = DataType.checkDataType(line);
