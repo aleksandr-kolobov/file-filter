@@ -20,7 +20,8 @@ public class FilterWriter implements AutoCloseable {
 
     public void initWriterByType(DataType dataType) throws IOException {
         if (writers.containsKey(dataType)) {
-            throw new RuntimeException("Double init writer by type: " + dataType);
+            System.err.println("Double init writer by type: " + dataType);
+            return;
         }
         String fileName = path + prefix + dataType.getFileName();
         writers.put(dataType, new BufferedWriter(new FileWriter(fileName, appendMode)));

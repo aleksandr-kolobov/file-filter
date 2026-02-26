@@ -22,7 +22,7 @@ public class FileFilterApp {
                 try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
                     service.processFile(reader, writer);
                 } catch (Exception e) {
-                    System.err.println("Error process file: " + inputFile + " - " + e.getMessage());
+                    System.err.println("Error process file. " + e.getMessage());
                 }
             }
         } catch (Exception e) {

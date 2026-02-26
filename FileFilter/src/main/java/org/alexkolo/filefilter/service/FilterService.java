@@ -12,7 +12,7 @@ public class FilterService {
 
     public void processFile(BufferedReader reader, FilterWriter writer) throws IOException {
         String line;
-        while ((line = reader.readLine()) != null) {
+        while ((line = processLine(reader)) != null) {
             if (line.isBlank()) {
                 continue;
             }
@@ -25,5 +25,16 @@ public class FilterService {
 
             statistics.addValue(dataType, line);
         }
+    }
+
+    private String processLine(BufferedReader reader) {
+        String line;
+        try {
+            line = reader.readLine();
+        } catch (IOException e) {
+            System.err.println("Error process line. " + e.getMessage());
+            return "";
+        }
+        return line;
     }
 }
