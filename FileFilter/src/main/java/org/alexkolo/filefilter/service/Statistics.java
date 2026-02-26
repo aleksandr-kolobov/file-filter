@@ -1,5 +1,6 @@
 package org.alexkolo.filefilter.service;
 
+import lombok.Getter;
 import org.alexkolo.filefilter.model.DataType;
 
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import java.math.RoundingMode;
 import java.util.EnumMap;
 import java.util.Map;
 
+@Getter
 @RequiredArgsConstructor
 public class Statistics {
     private final boolean isFull;
