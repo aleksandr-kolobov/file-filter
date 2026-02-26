@@ -6,8 +6,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -26,7 +28,8 @@ public class FilterWriter implements AutoCloseable {
             return;
         }
         String fileName = path + prefix + dataType.getFileName();
-        writers.put(dataType, new BufferedWriter(new FileWriter(fileName, appendMode)));
+        writers.put(dataType,new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(fileName, appendMode), StandardCharsets.UTF_8)));
     }
 
     @Override

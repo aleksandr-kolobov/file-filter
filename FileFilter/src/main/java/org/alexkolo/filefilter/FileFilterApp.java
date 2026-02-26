@@ -6,7 +6,9 @@ import org.alexkolo.filefilter.service.Statistics;
 import org.alexkolo.filefilter.service.FilterWriter;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 public class FileFilterApp {
     public static void main(String[] args) {
@@ -20,7 +22,8 @@ public class FileFilterApp {
         FilterService service = new FilterService(statistics);
         try (FilterWriter writer = new FilterWriter(params.getOutputPath(), params.getFilePrefix(), params.isAppendMode())) {
             for (String inputFile : params.getInputFiles()) {
-                try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
+                try (BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(new FileInputStream(inputFile), StandardCharsets.UTF_8))) {
                     service.processFile(reader, writer);
                 } catch (Exception e) {
                     System.err.println("Error process file. " + e.getMessage());
