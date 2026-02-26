@@ -1,8 +1,10 @@
 package org.alexkolo.filefilter.service;
 
 import org.alexkolo.filefilter.model.DataType;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

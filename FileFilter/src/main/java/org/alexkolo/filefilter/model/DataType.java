@@ -2,6 +2,7 @@ package org.alexkolo.filefilter.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
 import java.util.regex.Pattern;
 
 @RequiredArgsConstructor

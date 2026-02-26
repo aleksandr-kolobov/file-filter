@@ -1,6 +1,7 @@
 package org.alexkolo.filefilter.config;
 
 import lombok.Getter;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;

@@ -1,7 +1,9 @@
 package org.alexkolo.filefilter.service;
 
-import lombok.RequiredArgsConstructor;
 import org.alexkolo.filefilter.model.DataType;
+
+import lombok.RequiredArgsConstructor;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
